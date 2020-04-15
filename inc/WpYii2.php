@@ -34,6 +34,7 @@ class WpYii2
     {
         try
         {
+            Yii::$app->user->enableSession = true;
             if ($user instanceof WP_User)
             {
                 $classUser = Yii::$app->user->identityClass;
@@ -54,17 +55,28 @@ class WpYii2
             {
                 Yii::warning("user not instanse WP_User:" . print_r($user, true));
             }
+
+
         }
         catch (Exception $e)
         {
             self::error($e);
         }
+        Yii::$app->user->enableSession = false;
     }
 
     public static function logout()
     {
-        Yii::$app->user->logout(true);
-        Yii::info('Logount user id:' . Yii::$app->user->id);
+        try
+        {
+            Yii::$app->user->enableSession = true;
+            Yii::$app->user->logout(true);
+            Yii::$app->user->enableSession = false;
+        }
+        catch (Exception $e)
+        {
+            self::error($e);
+        }
     }
 
     /**
@@ -79,7 +91,7 @@ class WpYii2
             {
                 //update Yii auth cookie \Yii::$app->user->renewAuthStatus() срабатывает
                 // wp - no login, Yii - login
-                if (!Yii::$app->user->isGuest && Yii::$app->user->enableAutoLogin)
+                if (Yii::$app->user->isGuest && Yii::$app->user->enableAutoLogin)
                 {
                     //autologin in yii2
                     self::login(wp_get_current_user()->user_login, wp_get_current_user());
