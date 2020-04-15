@@ -16,8 +16,7 @@ if (!defined('WP_YII2_PATH_SITE'))
 
 if (!defined('WP_YII2_PATH_CONFIG'))
 {
-    define('WP_YII2_PATH_CONFIG', ABSPATH . '/../yii2-basic/site/');
-
+    define('WP_YII2_PATH_CONFIG', WP_YII2_PATH_SITE . 'config/');
 }
 
 

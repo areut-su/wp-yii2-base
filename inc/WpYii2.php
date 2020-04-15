@@ -113,7 +113,8 @@ class WpYii2
         include_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_config.php');
 
         require WP_YII2_PATH_EXT . '/yii/Yii.php';
-        $yiiConfig = require WP_YII2_PATH_SITE . 'config/wp.php';
+        $yiiConfig = require WP_YII2_PATH_CONFIG . 'wp.php';
+
 
         try
         {
