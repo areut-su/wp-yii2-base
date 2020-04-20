@@ -133,6 +133,7 @@ class WpYii2
 
         $flag      = include_once(WP_YII2_PATH_EXT . 'yii/Yii.php');
         $yiiConfig = (include WP_YII2_FILE_CONFIG);
+        require(WP_YII2_PATH_VENDOR . 'autoload.php');
 
         if ($yiiConfig && $flag)
         {

@@ -26,4 +26,4 @@ include_once(__DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'WpYi
 
 WpYii2::run();
 
-include_once(__DIR__ . DIRECTORY_SEPARATOR . 'shortcode' . DIRECTORY_SEPARATOR . 'test.php');
+include_once(__DIR__ . DIRECTORY_SEPARATOR . 'shortcode' . DIRECTORY_SEPARATOR . 'base.php');

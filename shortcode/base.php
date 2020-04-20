@@ -2,16 +2,16 @@
 
 use areutWPYii2\WpYii2;
 
-add_shortcode('WP_YII2_TEST', 'wp_yii2_test');
+add_shortcode('WP_YII2_BASE', 'wp_yii2_base');
 
 /**
  * @param array $atr
  */
-function wp_yii2_test($atr)
+function wp_yii2_base($atr)
 {
 
     $out = '';
-    if (!class_exists('areutWPYii2\WpYii2'))
+    if (class_exists('areutWPYii2\WpYii2'))
     {
         $action = (is_array($atr) && isset($atr['action'])) ? $atr['action'] : 'site/about';
 
