@@ -1,22 +1,33 @@
 <?php
 
 //  wp disable      error_handler()
-define('YII_ENABLE_ERROR_HANDLER', false);
+if (!defined('YII_ENABLE_ERROR_HANDLER'))
+{
+    define('YII_ENABLE_ERROR_HANDLER', false);
+}
+
+
+if (!defined('WP_YII2_PATH'))
+{
+    define('WP_YII2_PATH', ABSPATH . '../yii2-basic/');
+}
+
+if (!defined('WP_YII2_FILE_CONFIG'))
+{
+    define('WP_YII2_FILE_CONFIG', WP_YII2_PATH . 'config/wp.php');
+//    define('WP_YII2_FILE_CONFIG', WP_YII2_PATH . 'site/config/wp.php');
+}
+
+if (!defined('WP_YII2_PATH_VENDOR'))
+{
+    define('WP_YII2_PATH_VENDOR', WP_YII2_PATH . 'vendor/');
+
+}
 
 if (!defined('WP_YII2_PATH_EXT'))
 {
-    define('WP_YII2_PATH_EXT', ABSPATH . '/../yii2-basic/site/extension/yii2-wp/');
-}
-
-if (!defined('WP_YII2_PATH_SITE'))
-{
-    define('WP_YII2_PATH_SITE', ABSPATH . '/../yii2-basic/site/');
-
-}
-
-if (!defined('WP_YII2_PATH_CONFIG'))
-{
-    define('WP_YII2_PATH_CONFIG', WP_YII2_PATH_SITE . 'config/');
+    define('WP_YII2_PATH_EXT', WP_YII2_PATH . 'areut/yii2-wp/');
+//    define('WP_YII2_PATH_EXT', WP_YII2_PATH . 'site/extension/yii2-wp/');
 }
 
 

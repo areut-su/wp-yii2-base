@@ -24,6 +24,6 @@ use areutWPYii2\WpYii2;
 
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'WpYii2.php');
 
-WpYii2::add_action();
+WpYii2::run();
 
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'shortcode' . DIRECTORY_SEPARATOR . 'test.php');

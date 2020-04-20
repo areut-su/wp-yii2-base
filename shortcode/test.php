@@ -10,26 +10,31 @@ add_shortcode('WP_YII2_TEST', 'wp_yii2_test');
 function wp_yii2_test($atr)
 {
 
-    $action = (is_array($atr) && isset($atr['action'])) ? $atr['action'] : 'site/about';
-    $out    = '';
-    try
+    $out = '';
+    if (!class_exists('areutWPYii2\WpYii2'))
     {
-        $out .= Yii::$app->runAction($action);
+        $action = (is_array($atr) && isset($atr['action'])) ? $atr['action'] : 'site/about';
+
+        try
+        {
+            $out = Yii::$app->runAction($action);
+        }
+
+        catch (Exception $e)
+        {
+            WpYii2::error($e);
+        }
+
+        try
+        {
+            $out .= Yii::$app->runAction('site/test');
+        }
+        catch (Exception $e)
+        {
+            WpYii2::error($e);
+        }
     }
 
-    catch (Exception $e)
-    {
-        WpYii2::error($e);
-    }
-
-    try
-    {
-        $out .= Yii::$app->runAction('site/test');
-    }
-    catch (Exception $e)
-    {
-        WpYii2::error($e);
-    }
 
     return $out;
 }

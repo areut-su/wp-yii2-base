@@ -15,9 +15,9 @@ class WpYii2
      * @var $app Application
      */
 
-    public static function add_action()
+    protected static function add_action()
     {
-        add_action('init', [static::class, 'init']);
+
         add_action('init', [static::class, 'sendCookie'], 100);
         add_action('wp_head', [static::class, 'sendHeaders']);
         add_action('wp_print_footer_scripts', [static::class, 'printJSFoter'], 250);
@@ -79,6 +79,13 @@ class WpYii2
         }
     }
 
+    public static function run()
+    {
+
+        add_action('init', [static::class, 'init']);
+
+    }
+
     /**
      * set login cookie
      */
@@ -122,19 +129,24 @@ class WpYii2
     {
 
 
-        include_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_config.php');
+        require_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_config.php');
 
-        require WP_YII2_PATH_EXT . '/yii/Yii.php';
-        $yiiConfig = require WP_YII2_PATH_CONFIG . 'wp.php';
+        $flag      = include_once(WP_YII2_PATH_EXT . 'yii/Yii.php');
+        $yiiConfig = (include WP_YII2_FILE_CONFIG);
 
-
-        try
+        if ($yiiConfig && $flag)
         {
-            (new  Application($yiiConfig));
-        }
-        catch (Exception $e)
-        {
-            self::error($e);
+
+            try
+            {
+                (new  Application($yiiConfig));
+            }
+            catch (Exception $e)
+            {
+                self::error($e);
+            }
+
+            static::add_action();
         }
 
     }
