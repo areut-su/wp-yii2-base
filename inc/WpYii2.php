@@ -89,7 +89,6 @@ class WpYii2
     {
 
         add_action('init', [static::class, 'init']);
-
     }
 
     /**
@@ -133,7 +132,7 @@ class WpYii2
 
     public static function init()
     {
-
+        do_action('wpyii2_befor_init');
         require_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_config.php');
 
         /** @noinspection PhpIncludeInspection */
