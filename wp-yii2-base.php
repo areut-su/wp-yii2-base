@@ -24,6 +24,9 @@ use areutWPYii2\WpYii2;
 
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'WpYii2.php');
 
+do_action('wpyii2_befor_init');
 WpYii2::run();
+do_action('wpyii2_after_init');
+
 
 include_once(__DIR__ . DIRECTORY_SEPARATOR . 'shortcode' . DIRECTORY_SEPARATOR . 'base.php');

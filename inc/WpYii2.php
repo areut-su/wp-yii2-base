@@ -11,6 +11,12 @@ use yii\helpers\Html;
 
 class WpYii2
 {
+    static $enableCssFiles = true;
+    static $enableCss = true;
+    static $enableMetaTags = false;
+    static $enableLinkTags = false;
+
+
     /**
      * @var $app Application
      */
@@ -128,12 +134,12 @@ class WpYii2
     public static function init()
     {
 
-
         require_once(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_config.php');
 
+        /** @noinspection PhpIncludeInspection */
         $flag      = include_once(WP_YII2_PATH_EXT . 'yii/Yii.php');
-        $yiiConfig = (include WP_YII2_FILE_CONFIG);
-        require(WP_YII2_PATH_VENDOR . 'autoload.php');
+        $yiiConfig = include(WP_YII2_FILE_CONFIG);
+        include_once(WP_YII2_PATH_VENDOR . 'autoload.php');
 
         if ($yiiConfig && $flag)
         {
@@ -154,11 +160,16 @@ class WpYii2
 
     public static function printJSFoter()
     {
+
         //@todo View class update
         //@todo filter clone js jQuery
         ob_start();
         ob_implicit_flush(false);
+
+        Yii::$app->view->beginPage();
+        Yii::$app->view->head();
         Yii::$app->view->endBody();
+        static::FilterAssets();
         Yii::$app->view->endPage(true);
     }
 
@@ -177,5 +188,26 @@ class WpYii2
             Yii::error($message);
         }
     }
+
+    protected static function FilterAssets()
+    {
+        if (!static::$enableCssFiles)
+        {
+            Yii::$app->view->cssFiles = [];
+        }
+        if (!static::$enableCss)
+        {
+            Yii::$app->view->css = [];
+        }
+        if (!static::$enableLinkTags)
+        {
+            Yii::$app->view->linkTags = [];
+        }
+        if (!static::$enableMetaTags)
+        {
+            Yii::$app->view->metaTags = [];
+        }
+    }
+
 
 }
